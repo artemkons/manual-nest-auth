@@ -1,17 +1,17 @@
 interface DatabaseConfigAttributes {
-  username: string;
-  password: string;
-  host: string;
-  port: number;
+  username: string
+  password: string
+  host: string
+  port: number
   // TODO use dialect from sequelize
-  dialect: 'postgres';
-  logging: boolean | (() => void);
-  force: boolean;
-  timezone: string;
+  dialect: 'postgres'
+  logging: boolean | (() => void)
+  force: boolean
+  timezone: string
 }
 
 export interface DatabaseConfig {
-  development: DatabaseConfigAttributes;
+  development: DatabaseConfigAttributes
 }
 
 export const databaseConfig: DatabaseConfig = {
@@ -25,4 +25,4 @@ export const databaseConfig: DatabaseConfig = {
     force: true,
     timezone: '+02:00',
   },
-};
+}
