@@ -1,6 +1,16 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common'
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Delete,
+  UseGuards,
+} from '@nestjs/common'
 import { UserService } from './user.service'
 import { User } from './interfaces/User'
+import { CheckLoggedInUserGuard } from '../../shared/guards/check-logged-user.guard'
 
 @Controller('user')
 export class UserController {
@@ -29,6 +39,7 @@ export class UserController {
   }
 
   @Delete('user/:userId')
+  @UseGuards(CheckLoggedInUserGuard)
   public async delete(@Param() params) {
     return await this.userService.destroy(params.userId)
   }

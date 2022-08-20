@@ -11,7 +11,10 @@ export class AuthenticationController {
   ) {}
 
   @Post('login')
-  async login(@Body() body: any, @Response() res) {
+  async login(
+    @Body() body: { email: string; password: string },
+    @Response() res,
+  ) {
     if (!body.email || !body.password)
       return res
         .status(HttpStatus.BAD_REQUEST)

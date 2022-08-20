@@ -1,5 +1,6 @@
 import {
   AutoIncrement,
+  BeforeCreate,
   Column,
   CreatedAt,
   DataType,
@@ -9,6 +10,8 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript'
+
+import { createHmac } from 'crypto'
 
 @Table({
   timestamps: true,
@@ -47,4 +50,9 @@ export class User extends Model<User> {
 
   @DeletedAt
   public deletedAt: Date
+
+  @BeforeCreate
+  public static async hashPassword(user: User) {
+    user.password = createHmac('sha256', user.password).digest('hex')
+  }
 }
